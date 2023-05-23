@@ -1,9 +1,10 @@
+import React from "react";
 import { Container, RoundButton } from "./Button.styles";
 
-export const Button = () => {
+export default function Button() {
   return (
     <Container>
       <RoundButton />
     </Container>
   );
-};
+}

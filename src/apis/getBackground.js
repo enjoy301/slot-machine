@@ -1,9 +1,9 @@
-import { CONFIG } from "site.config";
-import { NotionAPI } from "notion-client";
+// import { NotionAPI } from "notion-client";
+// import { CONFIG } from "../../site.config";
 
-export async function getBackground() {
-  const api = new NotionAPI();
-  const pageId = CONFIG.notion.pageId;
+export default async function getBackground() {
+  // const api = new NotionAPI();
+  // const { pageId } = CONFIG.notion;
 
   return null;
 }

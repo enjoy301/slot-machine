@@ -1,6 +1,7 @@
+import React from "react";
 import { Container, Line } from "./Background.styles";
 
-export const Background = () => {
+export default function Background() {
   return (
     <Container>
       <Line />
@@ -11,4 +12,4 @@ export const Background = () => {
       <Line />
     </Container>
   );
-};
+}

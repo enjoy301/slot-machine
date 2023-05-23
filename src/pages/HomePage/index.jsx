@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Container,
   HomePageLayout,
@@ -5,10 +6,10 @@ import {
   SlotContainer,
   Title,
 } from "./HomePage.styles";
-import { Background } from "../../components/Background";
-import { Button } from "../../components/Button";
+import Button from "../../components/Button";
+import Background from "../../components/Background";
 
-export const HomePage = () => {
+export default function HomePage() {
   return (
     <HomePageLayout>
       <Background />
@@ -20,4 +21,4 @@ export const HomePage = () => {
       </Container>
     </HomePageLayout>
   );
-};
+}
