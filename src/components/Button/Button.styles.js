@@ -8,6 +8,12 @@ export const Container = styled.div`
 `;
 
 export const RoundButton = styled.button`
-  width: 100px;
-  height: 20px;
+  width: 215px;
+  height: 50px;
+  background-color: #ffb800;
+  border: 0;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
 `;

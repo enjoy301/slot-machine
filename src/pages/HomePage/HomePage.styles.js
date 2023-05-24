@@ -8,8 +8,9 @@ export const HomePageLayout = styled.div`
 
 export const Container = styled.div`
   width: 500px;
-  height: 600px;
+  height: 700px;
   background-color: white;
+  border-radius: 45px;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -19,6 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
+  color: #6a6a6a;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -26,10 +28,15 @@ export const Title = styled.h1`
   flex: 1;
 `;
 
-export const SlotContainer = styled.div`
+export const ResultContainer = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const Result = styled.div`
-  flex: 1;
+export const Partition = styled.div`
+  width: 0px;
+  height: 90%;
+  border: 1px solid #ffb800;
 `;
