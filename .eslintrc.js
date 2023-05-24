@@ -18,5 +18,7 @@ module.exports = {
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-param-reassign": ["error", { props: false }],
   },
 };
