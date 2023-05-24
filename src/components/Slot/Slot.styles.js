@@ -12,12 +12,14 @@ export const LeftArrow = styled.div`
   flex: 1;
   display: flex;
   justify-content: right;
+  align-self: center;
 `;
 
 export const RightArrow = styled.div`
   flex: 1;
   display: flex;
   justify-content: left;
+  align-self: center;
 `;
 
 export const Pointer = styled.div`
