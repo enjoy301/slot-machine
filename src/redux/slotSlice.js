@@ -3,21 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slotSlice = createSlice({
   name: "slotState",
   initialState: {
-    slotState: {
-      isIdle: true,
-      isStopping: false,
-    },
+    isIdle: false,
+    isStopping: false,
+    result: [null, null, null],
   },
   reducers: {
     reverseIdle: (state) => {
-      state.slotState.isIdle = !state.slotState.isIdle;
+      state.isIdle = !state.isIdle;
     },
     reverseStopping: (state) => {
-      state.slotState.isStopping = !state.slotState.isStopping;
+      state.isStopping = !state.isStopping;
+    },
+    addResult: (state, action) => {
+      state.result.unshift(action.payload);
+      state.result.pop();
     },
   },
 });
 
-export const { reverseIdle, reverseStopping } = slotSlice.actions;
+export const { reverseIdle, reverseStopping, addResult } = slotSlice.actions;
 
 export default slotSlice.reducer;

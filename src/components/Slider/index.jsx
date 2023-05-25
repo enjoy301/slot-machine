@@ -1,57 +1,55 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Imoji } from "./Slider.styles";
-import { reverseStopping } from "../../redux/slotSlice";
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      // 만약 delay가 null이 아니라면
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-
-    return () => {};
-  }, [delay]);
-}
+import CONFIG from "../../site.config";
+import { Container, Emoji } from "./Slider.styles";
+import { reverseStopping, addResult } from "../../redux/slotSlice";
+import useInterval from "../../hooks/useInterval";
 
 export default function Slider() {
   const [margin, setMargin] = useState(0);
+  const [itemHeight, setItemHeight] = useState(0);
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
   const [speed, setSpeed] = useState(10);
+  const [stopPoint, setStopPoint] = useState(987654321);
+
   const emojiRef = useRef(null);
 
   const dispatch = useDispatch();
-  const isIdle = useSelector((state) => state.slot.slotState.isIdle);
-  const isStopping = useSelector((state) => state.slot.slotState.isStopping);
+  const isIdle = useSelector((state) => state.slot.isIdle);
+  const isStopping = useSelector((state) => state.slot.isStopping);
+
+  const { emojiArray } = CONFIG;
 
   useEffect(() => {
-    setTo(-emojiRef.current.clientHeight * 8);
-    setFrom(emojiRef.current.clientHeight * 8);
+    setItemHeight(emojiRef.current.clientHeight * 2);
+    setTo(-itemHeight * 4);
+    setFrom(itemHeight * 4);
   });
 
   useInterval(
     () => {
-      setMargin(margin - speed);
       if (isStopping) {
-        setSpeed(speed - 0.1);
+        if (speed > 0) {
+          setSpeed(speed - 0.1);
+        } else {
+          if (stopPoint === 987654321) {
+            setStopPoint(Math.ceil(margin / itemHeight) * itemHeight);
+            setSpeed(-0.9);
+          }
 
-        if (speed <= 0) {
-          dispatch(reverseStopping());
-          setSpeed(10);
+          if (margin > stopPoint) {
+            dispatch(
+              addResult(emojiArray[Math.floor(-stopPoint / itemHeight) + 5]),
+            );
+            dispatch(reverseStopping());
+            setSpeed(10);
+            setStopPoint(987654321);
+          }
         }
       }
 
+      setMargin(margin - speed);
       if (margin <= to) {
         setMargin(from);
       }
@@ -59,19 +57,17 @@ export default function Slider() {
     isIdle || isStopping ? 10 : null,
   );
 
-  return (
-    <Container margin={margin}>
-      <Imoji>🥶</Imoji>
-      <Imoji ref={emojiRef}>🇰🇷</Imoji>
-      <Imoji>🇸🇽</Imoji>
-      <Imoji>😄</Imoji>
-      <Imoji>😊</Imoji>
-      <Imoji>😡</Imoji>
-      <Imoji>😎</Imoji>
-      <Imoji>🤬</Imoji>
-      <Imoji>🥶</Imoji>
-      <Imoji>🇰🇷</Imoji>
-      <Imoji>🇸🇽</Imoji>
-    </Container>
-  );
+  const renderEmoji = () => {
+    return emojiArray.map((emoji, index) =>
+      index === 1 ? (
+        <Emoji key={index}>{emoji.object}</Emoji>
+      ) : (
+        <Emoji ref={emojiRef} key={index}>
+          {emoji.object}
+        </Emoji>
+      ),
+    );
+  };
+
+  return <Container margin={margin}>{renderEmoji(emojiArray)}</Container>;
 }

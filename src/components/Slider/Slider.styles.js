@@ -10,7 +10,7 @@ export const Container = styled.div.attrs((props) => ({
   flex-direction: column;
 `;
 
-export const Imoji = styled.div`
+export const Emoji = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

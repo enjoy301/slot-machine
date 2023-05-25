@@ -33,3 +33,16 @@ export const ImojiText = styled.div`
   color: #ffb800;
   font-size: 20px;
 `;
+
+export const ResultContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Partition = styled.div`
+  width: 0px;
+  height: 90%;
+  border: 1px solid #ffb800;
+`;

@@ -1,13 +1,39 @@
 import React from "react";
-import { Container, Imoji, ImojiContainer, ImojiText } from "./Result.styles";
+import { useSelector } from "react-redux";
+import {
+  Container,
+  Imoji,
+  ImojiContainer,
+  ImojiText,
+  Partition,
+  ResultContainer,
+} from "./Result.styles";
 
 export default function Result() {
+  const result = useSelector((state) => state.slot.result);
+
   return (
-    <Container>
-      <ImojiContainer>
-        <Imoji>😇</Imoji>
-      </ImojiContainer>
-      <ImojiText>냥냥</ImojiText>
-    </Container>
+    <ResultContainer>
+      <Container>
+        <ImojiContainer>
+          <Imoji>{result[0]?.object}</Imoji>
+        </ImojiContainer>
+        <ImojiText>{result[0]?.name}</ImojiText>
+      </Container>
+      <Partition />
+      <Container>
+        <ImojiContainer>
+          <Imoji>{result[1]?.object}</Imoji>
+        </ImojiContainer>
+        <ImojiText>{result[1]?.name}</ImojiText>
+      </Container>
+      <Partition />
+      <Container>
+        <ImojiContainer>
+          <Imoji>{result[2]?.object}</Imoji>
+        </ImojiContainer>
+        <ImojiText>{result[2]?.name}</ImojiText>
+      </Container>
+    </ResultContainer>
   );
 }

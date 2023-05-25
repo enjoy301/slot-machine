@@ -27,16 +27,3 @@ export const Title = styled.h1`
   align-items: center;
   flex: 1;
 `;
-
-export const ResultContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Partition = styled.div`
-  width: 0px;
-  height: 90%;
-  border: 1px solid #ffb800;
-`;

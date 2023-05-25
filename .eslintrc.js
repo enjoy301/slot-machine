@@ -20,5 +20,6 @@ module.exports = {
     "prefer-arrow-callback": "off",
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": ["error", { props: false }],
+    "react/no-array-index-key": "off",
   },
 };

@@ -5,8 +5,8 @@ import { reverseIdle, reverseStopping } from "../../redux/slotSlice";
 
 export default function Button() {
   const dispatch = useDispatch();
-  const isIdle = useSelector((state) => state.slot.slotState.isIdle);
-  const isStopping = useSelector((state) => state.slot.slotState.isStopping);
+  const isIdle = useSelector((state) => state.slot.isIdle);
+  const isStopping = useSelector((state) => state.slot.isStopping);
 
   const handleClick = () => {
     if (isStopping) return;
