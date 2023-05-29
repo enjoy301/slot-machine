@@ -32,6 +32,7 @@ export const ImojiText = styled.div`
   align-items: center;
   color: #ffb800;
   font-size: 20px;
+  margin-top: 10px;
 `;
 
 export const ResultContainer = styled.div`
@@ -43,6 +44,6 @@ export const ResultContainer = styled.div`
 
 export const Partition = styled.div`
   width: 0px;
-  height: 90%;
+  height: 50%;
   border: 1px solid #ffb800;
 `;

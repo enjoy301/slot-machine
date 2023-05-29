@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  flex: 1;
+  flex: 0.8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,4 +16,5 @@ export const RoundButton = styled.button`
   color: #fff;
   cursor: pointer;
   font-size: 20px;
+  font-family: "IM_Hyemin-Bold";
 `;

@@ -1,13 +1,24 @@
 import React from "react";
-import { LeftArrow, RightArrow, Container, Pointer } from "./Slot.styles";
+import {
+  LeftArrow,
+  RightArrow,
+  Container,
+  Pointer,
+  LeftArrowContainer,
+  RightArrowContainer,
+} from "./Slot.styles";
 import Slider from "../Slider";
 
 export default function Slot() {
   return (
     <Container>
-      <LeftArrow>{"->"}</LeftArrow>
+      <LeftArrowContainer>
+        <LeftArrow />
+      </LeftArrowContainer>
       <Slider />
-      <RightArrow>{"<-"}</RightArrow>
+      <RightArrowContainer>
+        <RightArrow />
+      </RightArrowContainer>
       <Pointer />
     </Container>
   );

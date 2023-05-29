@@ -7,8 +7,8 @@ export const HomePageLayout = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 500px;
-  height: 700px;
+  width: max(600px, 40%);
+  height: 80%;
   background-color: white;
   border-radius: 45px;
   display: flex;
@@ -25,5 +25,5 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  flex: 0.8;
 `;
