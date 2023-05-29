@@ -1,4 +1,8 @@
 const CONFIG = {
+  site: {
+    title: "무엇이 될까요?",
+    favicon: "https://stackoverflow.com/favicon.ico",
+  },
   title: {
     text: "무엇이 될까요?",
     color: "#6a6a6a",
