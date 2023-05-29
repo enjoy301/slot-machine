@@ -1,4 +1,5 @@
 import { styled, keyframes, css } from "styled-components";
+import CONFIG from "../../site.config";
 
 export const Container = styled.div`
   flex: 0.8;
@@ -22,10 +23,10 @@ const clicked = keyframes`
 export const RoundButton = styled.button`
   width: 215px;
   height: 50px;
-  background-color: #ffb800;
+  background-color: ${CONFIG.button.backgroundColor};
   border: 0;
   border-radius: 100px;
-  color: #fff;
+  color: ${CONFIG.button.textColor};
   cursor: pointer;
   font-size: 20px;
   font-family: "IM_Hyemin-Bold";

@@ -1,4 +1,20 @@
 const CONFIG = {
+  title: {
+    text: "무엇이 될까요?",
+    color: "#6a6a6a",
+  },
+  backgroundColor: "#ffd976",
+  slotColor: "#ffd976",
+  button: {
+    backgroundColor: "#ffb800",
+    textColor: "#ffffff",
+    buttonText: ["돌려!", "멈춰!", "두구두구"],
+  },
+  result: {
+    backgroundColor: "rgba(255, 217, 118, 0.3)",
+    textColor: "#ffb800",
+    partitionColor: "#ffb800",
+  },
   objectArray: [
     { object: "👋", name: "안녕", isEmoji: true },
     { object: "👨‍💻", name: "개발자", isEmoji: true },
