@@ -19,11 +19,15 @@ export default function Button() {
     }
   };
 
+  const buttonText = () => {
+    if (isStopping) return "두구두구";
+    if (isIdle) return "멈춰!";
+    return "돌려!";
+  };
+
   return (
     <Container>
-      <RoundButton onClick={handleClick}>
-        {isIdle ? "멈춰!" : "돌려!"}
-      </RoundButton>
+      <RoundButton onClick={handleClick}>{buttonText()}</RoundButton>
     </Container>
   );
 }

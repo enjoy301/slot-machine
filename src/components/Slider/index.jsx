@@ -5,56 +5,113 @@ import { Container, Emoji } from "./Slider.styles";
 import { reverseStopping, addResult } from "../../redux/slotSlice";
 import useInterval from "../../hooks/useInterval";
 
+const INITIAL_SPEED = 10;
+const INITIAL_STOP_POINT = 987654321;
+
 export default function Slider() {
   const [margin, setMargin] = useState(0);
   const [itemHeight, setItemHeight] = useState(0);
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
-  const [speed, setSpeed] = useState(10);
-  const [stopPoint, setStopPoint] = useState(987654321);
+  const [speed, setSpeed] = useState(INITIAL_SPEED);
+  const [beforeSpeed, setBeforeSpeed] = useState(INITIAL_SPEED);
+  const [stopPoint, setStopPoint] = useState(INITIAL_STOP_POINT);
+  const [emojiArray, setEmojiArray] = useState(CONFIG.emojiArray);
 
   const emojiRef = useRef(null);
+  const emojiOriginLength = useRef(CONFIG.emojiArray.length);
 
   const dispatch = useDispatch();
   const isIdle = useSelector((state) => state.slot.isIdle);
   const isStopping = useSelector((state) => state.slot.isStopping);
 
-  const { emojiArray } = CONFIG;
+  useEffect(() => {
+    emojiArray.unshift(emojiArray[emojiArray.length - 1]);
+    emojiArray.push(emojiArray[1]);
+    emojiArray.push(emojiArray[2]);
+
+    if (emojiArray.length % 2 === 0) {
+      emojiArray.push(emojiArray[3]);
+    }
+
+    setEmojiArray(emojiArray);
+  }, []);
 
   useEffect(() => {
-    setItemHeight(emojiRef.current.clientHeight * 2);
-    setTo(-itemHeight * 4);
-    setFrom(itemHeight * 4);
-  });
+    const { clientHeight } = emojiRef.current;
+    const len = emojiArray.length;
+
+    setItemHeight(clientHeight * 2);
+    setFrom(clientHeight * (len - 3));
+
+    if (emojiOriginLength.current % 2 === 0) {
+      setTo(-clientHeight * (len - 3));
+    } else {
+      setTo(-clientHeight * (len - 5));
+    }
+  }, [emojiArray]);
+
+  const handleStopPoint = () => {
+    let point = Math.ceil(margin / itemHeight) * itemHeight;
+    let random = Math.floor(Math.random() * 3);
+
+    while (random > 0) {
+      point += itemHeight;
+
+      if (point > from) {
+        point -= itemHeight * emojiOriginLength.current;
+      }
+
+      random -= 1;
+    }
+
+    setStopPoint(point);
+  };
 
   useInterval(
     () => {
       if (isStopping) {
-        if (speed > 0) {
-          setSpeed(speed - 0.1);
-        } else {
-          if (stopPoint === 987654321) {
-            setStopPoint(Math.ceil(margin / itemHeight) * itemHeight);
-            setSpeed(-0.9);
-          }
+        setBeforeSpeed(speed);
 
-          if (margin > stopPoint) {
-            dispatch(
-              addResult(emojiArray[Math.floor(-stopPoint / itemHeight) + 5]),
-            );
-            dispatch(reverseStopping());
-            setSpeed(10);
-            setStopPoint(987654321);
-          }
+        // 속도 조절
+        if (speed > 10) {
+          setSpeed(speed - 0.2);
+        } else if (speed > 5) {
+          setSpeed(speed - 0.15);
+        } else if (speed > 0) {
+          setSpeed(speed - 0.05);
+        } else if (speed > -3) {
+          setSpeed(speed - 0.02);
+        }
+
+        // 뒤로 굴러가기 직전 stopPoint 설정
+        if (speed < 0 && beforeSpeed >= 0) {
+          handleStopPoint();
+        }
+        // 멈추기
+        if (Math.abs(margin - stopPoint) < 4) {
+          dispatch(
+            addResult(
+              emojiArray[
+                Math.floor(-stopPoint / itemHeight) +
+                  (emojiArray.length - 1) / 2
+              ],
+            ),
+          );
+          dispatch(reverseStopping());
+          setSpeed(INITIAL_SPEED);
+          setStopPoint(987654321);
         }
       }
 
       setMargin(margin - speed);
-      if (margin <= to) {
+      if (margin < to) {
         setMargin(from);
+      } else if (margin > from) {
+        setMargin(to);
       }
     },
-    isIdle || isStopping ? 10 : null,
+    isIdle || isStopping ? 5 : null,
   );
 
   const renderEmoji = () => {
