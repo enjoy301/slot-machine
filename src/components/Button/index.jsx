@@ -27,7 +27,12 @@ export default function Button() {
 
   return (
     <Container>
-      <RoundButton onClick={handleClick}>{buttonText()}</RoundButton>
+      <RoundButton
+        onClick={handleClick}
+        animation={isStopping ? "stop" : "play"}
+      >
+        {buttonText()}
+      </RoundButton>
     </Container>
   );
 }

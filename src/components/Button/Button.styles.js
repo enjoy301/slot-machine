@@ -1,10 +1,22 @@
-import { styled } from "styled-components";
+import { styled, keyframes, css } from "styled-components";
 
 export const Container = styled.div`
   flex: 0.8;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const clicked = keyframes`
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  to {
+    transform: scale(1);
+  }
 `;
 
 export const RoundButton = styled.button`
@@ -17,4 +29,18 @@ export const RoundButton = styled.button`
   cursor: pointer;
   font-size: 20px;
   font-family: "IM_Hyemin-Bold";
+  ${(props) => {
+    if (props.animation === "play") {
+      return css`
+        &:active {
+          animation: ${clicked} 0.2s 1 linear;
+        }
+      `;
+    }
+    return css`
+      &:active {
+        animation: none;
+      }
+    `;
+  }}
 `;
