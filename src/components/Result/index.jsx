@@ -2,8 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   Container,
-  Imoji,
-  ImojiContainer,
+  ImageContainer,
+  Image,
+  Emoji,
+  EmojiContainer,
   ImojiText,
   Partition,
   ResultContainer,
@@ -15,23 +17,41 @@ export default function Result() {
   return (
     <ResultContainer>
       <Container>
-        <ImojiContainer>
-          <Imoji>{result[0]?.object}</Imoji>
-        </ImojiContainer>
+        {result[0].isEmoji ? (
+          <EmojiContainer>
+            <Emoji>{result[0]?.object}</Emoji>
+          </EmojiContainer>
+        ) : (
+          <ImageContainer>
+            <Image src={result[0].object} />
+          </ImageContainer>
+        )}
         <ImojiText>{result[0]?.name}</ImojiText>
       </Container>
       <Partition />
       <Container>
-        <ImojiContainer>
-          <Imoji>{result[1]?.object}</Imoji>
-        </ImojiContainer>
+        {result[1].isEmoji ? (
+          <EmojiContainer>
+            <Emoji>{result[1]?.object}</Emoji>
+          </EmojiContainer>
+        ) : (
+          <ImageContainer>
+            <Image src={result[1].object} />
+          </ImageContainer>
+        )}
         <ImojiText>{result[1]?.name}</ImojiText>
       </Container>
       <Partition />
       <Container>
-        <ImojiContainer>
-          <Imoji>{result[2]?.object}</Imoji>
-        </ImojiContainer>
+        {result[2].isEmoji ? (
+          <EmojiContainer>
+            <Emoji>{result[2]?.object}</Emoji>
+          </EmojiContainer>
+        ) : (
+          <ImageContainer>
+            <Image src={result[2].object} />
+          </ImageContainer>
+        )}
         <ImojiText>{result[2]?.name}</ImojiText>
       </Container>
     </ResultContainer>

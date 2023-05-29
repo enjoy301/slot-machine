@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const ImojiContainer = styled.div`
+export const EmojiContainer = styled.div`
   display: flex;
   width: 60px;
   height: 60px;
@@ -18,11 +18,27 @@ export const ImojiContainer = styled.div`
   border-radius: 100%;
 `;
 
-export const Imoji = styled.div`
+export const Emoji = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 40px;
+`;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  width: 60px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 217, 118, 0.3);
+  border-radius: 100%;
+`;
+
+export const Image = styled.img`
+  width: 40px;
+  height: 40px;
 `;
 
 export const ImojiText = styled.div`

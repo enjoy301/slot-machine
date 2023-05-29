@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CONFIG from "../../site.config";
-import { Container, Emoji } from "./Slider.styles";
+import { Container, Emoji, Image, ImageContainer } from "./Slider.styles";
 import { reverseStopping, addResult } from "../../redux/slotSlice";
 import useInterval from "../../hooks/useInterval";
 
@@ -16,40 +16,40 @@ export default function Slider() {
   const [speed, setSpeed] = useState(INITIAL_SPEED);
   const [beforeSpeed, setBeforeSpeed] = useState(INITIAL_SPEED);
   const [stopPoint, setStopPoint] = useState(INITIAL_STOP_POINT);
-  const [emojiArray, setEmojiArray] = useState(CONFIG.emojiArray);
+  const [objectArray, setObjectArray] = useState(CONFIG.objectArray);
 
-  const emojiRef = useRef(null);
-  const emojiOriginLength = useRef(CONFIG.emojiArray.length);
+  const objectRef = useRef(null);
+  const objectOriginLength = useRef(CONFIG.objectArray.length);
 
   const dispatch = useDispatch();
   const isIdle = useSelector((state) => state.slot.isIdle);
   const isStopping = useSelector((state) => state.slot.isStopping);
 
   useEffect(() => {
-    emojiArray.unshift(emojiArray[emojiArray.length - 1]);
-    emojiArray.push(emojiArray[1]);
-    emojiArray.push(emojiArray[2]);
+    objectArray.unshift(objectArray[objectArray.length - 1]);
+    objectArray.push(objectArray[1]);
+    objectArray.push(objectArray[2]);
 
-    if (emojiArray.length % 2 === 0) {
-      emojiArray.push(emojiArray[3]);
+    if (objectArray.length % 2 === 0) {
+      objectArray.push(objectArray[3]);
     }
 
-    setEmojiArray(emojiArray);
+    setObjectArray(objectArray);
   }, []);
 
   useEffect(() => {
-    const { clientHeight } = emojiRef.current;
-    const len = emojiArray.length;
+    const { clientHeight } = objectRef.current;
+    const len = objectArray.length;
 
     setItemHeight(clientHeight * 2);
     setFrom(clientHeight * (len - 3));
 
-    if (emojiOriginLength.current % 2 === 0) {
+    if (objectOriginLength.current % 2 === 0) {
       setTo(-clientHeight * (len - 3));
     } else {
       setTo(-clientHeight * (len - 5));
     }
-  }, [emojiArray]);
+  }, [objectArray]);
 
   const handleStopPoint = () => {
     let point = Math.ceil(margin / itemHeight) * itemHeight;
@@ -59,7 +59,7 @@ export default function Slider() {
       point += itemHeight;
 
       if (point > from) {
-        point -= itemHeight * emojiOriginLength.current;
+        point -= itemHeight * objectOriginLength.current;
       }
 
       random -= 1;
@@ -92,9 +92,9 @@ export default function Slider() {
         if (Math.abs(margin - stopPoint) < 4) {
           dispatch(
             addResult(
-              emojiArray[
+              objectArray[
                 Math.floor(-stopPoint / itemHeight) +
-                  (emojiArray.length - 1) / 2
+                  (objectArray.length - 1) / 2
               ],
             ),
           );
@@ -114,17 +114,32 @@ export default function Slider() {
     isIdle || isStopping ? 5 : null,
   );
 
-  const renderEmoji = () => {
-    return emojiArray.map((emoji, index) =>
-      index === 1 ? (
-        <Emoji key={index}>{emoji.object}</Emoji>
-      ) : (
-        <Emoji ref={emojiRef} key={index}>
-          {emoji.object}
-        </Emoji>
-      ),
-    );
+  const renderObject = () => {
+    return objectArray.map((object, index) => {
+      if (index === 1) {
+        if (object.isEmoji) {
+          return (
+            <Emoji ref={objectRef} key={index}>
+              {object.object}
+            </Emoji>
+          );
+        }
+        return (
+          <ImageContainer ref={objectRef}>
+            <Image key={index} src={object.object} />
+          </ImageContainer>
+        );
+      }
+      if (object.isEmoji) {
+        return <Emoji key={index}>{object.object}</Emoji>;
+      }
+      return (
+        <ImageContainer key={index}>
+          <Image src={object.object} />
+        </ImageContainer>
+      );
+    });
   };
 
-  return <Container margin={margin}>{renderEmoji(emojiArray)}</Container>;
+  return <Container margin={margin}>{renderObject()}</Container>;
 }
