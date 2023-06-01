@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
-import CONFIG from "../../site.config";
 
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${CONFIG.backgroundColor};
+  background-color: ${(props) => props.color};
   flex: 1;
   display: flex;
   flex-direction: column;

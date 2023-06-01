@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import CONFIG from "../../site.config";
 
 export const HomePageLayout = styled.div`
   width: 100vw;
@@ -21,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: ${CONFIG.title.color};
+  color: ${(props) => props.color};
   margin: 0;
   display: flex;
   justify-content: center;

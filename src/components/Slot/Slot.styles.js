@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import CONFIG from "../../site.config";
 
 export const Container = styled.div`
   flex: 1.2;
@@ -17,7 +16,7 @@ export const LeftArrowContainer = styled.div`
 `;
 
 export const LeftArrow = styled.div`
-  border-left: 20px solid ${CONFIG.slotColor};
+  border-left: 20px solid ${(props) => props.color};
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
 `;
@@ -30,7 +29,7 @@ export const RightArrowContainer = styled.div`
 `;
 
 export const RightArrow = styled.div`
-  border-right: 20px solid ${CONFIG.slotColor};
+  border-right: 20px solid ${(props) => props.color};
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
 `;
@@ -38,7 +37,7 @@ export const RightArrow = styled.div`
 export const Pointer = styled.div`
   width: 150px;
   height: 90px;
-  border: 2px solid ${CONFIG.slotColor} !important;
+  border: 2px solid ${(props) => props.color} !important;
   border-radius: 10px !important;
   position: absolute;
   top: 50%;

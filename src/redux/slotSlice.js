@@ -5,7 +5,7 @@ export const slotSlice = createSlice({
   initialState: {
     isIdle: false,
     isStopping: false,
-    result: [{ isEmoji: true }, { isEmoji: true }, { isEmoji: true }],
+    result: [{ type: "empty" }, { type: "empty" }, { type: "empty" }],
   },
   reducers: {
     reverseIdle: (state) => {

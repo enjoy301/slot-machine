@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   LeftArrow,
   RightArrow,
@@ -10,16 +11,18 @@ import {
 import Slider from "../Slider";
 
 export default function Slot() {
+  const config = useSelector((state) => state.config.config);
+
   return (
     <Container>
       <LeftArrowContainer>
-        <LeftArrow />
+        <LeftArrow color={config.slotColor} />
       </LeftArrowContainer>
       <Slider />
       <RightArrowContainer>
-        <RightArrow />
+        <RightArrow color={config.slotColor} />
       </RightArrowContainer>
-      <Pointer />
+      <Pointer color={config.slotColor} />
     </Container>
   );
 }

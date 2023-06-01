@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CONFIG from "../../site.config";
 import { Container, Emoji, Image, ImageContainer } from "./Slider.styles";
 import { reverseStopping, addResult } from "../../redux/slotSlice";
 import useInterval from "../../hooks/useInterval";
@@ -16,26 +15,14 @@ export default function Slider() {
   const [speed, setSpeed] = useState(INITIAL_SPEED);
   const [beforeSpeed, setBeforeSpeed] = useState(INITIAL_SPEED);
   const [stopPoint, setStopPoint] = useState(INITIAL_STOP_POINT);
-  const [objectArray, setObjectArray] = useState(CONFIG.objectArray);
-
-  const objectRef = useRef(null);
-  const objectOriginLength = useRef(CONFIG.objectArray.length);
 
   const dispatch = useDispatch();
   const isIdle = useSelector((state) => state.slot.isIdle);
   const isStopping = useSelector((state) => state.slot.isStopping);
 
-  useEffect(() => {
-    objectArray.unshift(objectArray[objectArray.length - 1]);
-    objectArray.push(objectArray[1]);
-    objectArray.push(objectArray[2]);
-
-    if (objectArray.length % 2 === 0) {
-      objectArray.push(objectArray[3]);
-    }
-
-    setObjectArray(objectArray);
-  }, []);
+  const objectArray = useSelector((state) => state.object.objectArray);
+  const objectOriginLength = useSelector((state) => state.object.originLength);
+  const objectRef = useRef(null);
 
   useEffect(() => {
     const { clientHeight } = objectRef.current;
@@ -44,12 +31,12 @@ export default function Slider() {
     setItemHeight(clientHeight * 2);
     setFrom(clientHeight * (len - 3));
 
-    if (objectOriginLength.current % 2 === 0) {
+    if (objectOriginLength % 2 === 0) {
       setTo(-clientHeight * (len - 3));
     } else {
       setTo(-clientHeight * (len - 5));
     }
-  }, [objectArray]);
+  }, []);
 
   const handleStopPoint = () => {
     let point = Math.ceil(margin / itemHeight) * itemHeight;
@@ -59,7 +46,7 @@ export default function Slider() {
       point += itemHeight;
 
       if (point > from) {
-        point -= itemHeight * objectOriginLength.current;
+        point -= itemHeight * objectOriginLength;
       }
 
       random -= 1;
@@ -117,7 +104,7 @@ export default function Slider() {
   const renderObject = () => {
     return objectArray.map((object, index) => {
       if (index === 1) {
-        if (object.isEmoji) {
+        if (object.type === "emoji") {
           return (
             <Emoji ref={objectRef} key={index}>
               {object.object}
@@ -130,7 +117,7 @@ export default function Slider() {
           </ImageContainer>
         );
       }
-      if (object.isEmoji) {
+      if (object.type === "emoji") {
         return <Emoji key={index}>{object.object}</Emoji>;
       }
       return (

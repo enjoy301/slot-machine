@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import CONFIG from "../../site.config";
 
 export const Container = styled.div`
   flex: 1;
@@ -15,7 +14,7 @@ export const EmojiContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${CONFIG.result.backgroundColor};
+  background-color: ${(props) => props.color};
   border-radius: 100%;
 `;
 
@@ -33,7 +32,7 @@ export const ImageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 217, 118, 0.3);
+  background-color: ${(props) => props.color};
   border-radius: 100%;
 `;
 
@@ -47,7 +46,7 @@ export const ImojiText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${CONFIG.result.textColor};
+  color: ${(props) => props.color};
   font-size: 20px;
   margin-top: 10px;
 `;
@@ -62,5 +61,5 @@ export const ResultContainer = styled.div`
 export const Partition = styled.div`
   width: 0px;
   height: 50%;
-  border: 1px solid ${CONFIG.result.partitionColor};
+  border: 1px solid ${(props) => props.color};
 `;

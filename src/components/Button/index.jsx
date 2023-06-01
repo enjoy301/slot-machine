@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, RoundButton } from "./Button.styles";
 import { reverseIdle, reverseStopping } from "../../redux/slotSlice";
-import CONFIG from "../../site.config";
 
 export default function Button() {
   const dispatch = useDispatch();
   const isIdle = useSelector((state) => state.slot.isIdle);
   const isStopping = useSelector((state) => state.slot.isStopping);
+  const config = useSelector((state) => state.config.config);
 
   const handleClick = () => {
     if (isStopping) return;
@@ -21,9 +21,9 @@ export default function Button() {
   };
 
   const buttonText = () => {
-    if (isStopping) return CONFIG.button.buttonText[2];
-    if (isIdle) return CONFIG.button.buttonText[1];
-    return CONFIG.button.buttonText[0];
+    if (isStopping) return config.stoppingText;
+    if (isIdle) return config.stopText;
+    return config.spinText;
   };
 
   return (
@@ -31,6 +31,8 @@ export default function Button() {
       <RoundButton
         onClick={handleClick}
         animation={isStopping ? "stop" : "play"}
+        color={config.buttonTextColor}
+        backgroundcolor={config.buttonColor}
       >
         {buttonText()}
       </RoundButton>
