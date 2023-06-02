@@ -1,6 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, HomePageLayout, Title } from "./HomePage.styles";
+import {
+  Container,
+  HomePageLayout,
+  Title,
+  LoadingContainer,
+} from "./HomePage.styles";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Slot from "../../components/Slot";
@@ -58,9 +64,10 @@ export default function HomePage() {
   }, [renderState]);
 
   const render = () => {
-    if (renderState === "loading") return <div>Loading...</div>;
+    if (renderState === "loading")
+      return <LoadingContainer>Loading...</LoadingContainer>;
     return (
-      <>
+      <HomePageLayout>
         <Background />
         <Container>
           <Title color={config.titleTextColor}>{config.title}</Title>
@@ -68,9 +75,9 @@ export default function HomePage() {
           <Button />
           <Result />
         </Container>
-      </>
+      </HomePageLayout>
     );
   };
 
-  return <HomePageLayout>{render()}</HomePageLayout>;
+  return render();
 }

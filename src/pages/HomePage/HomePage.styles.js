@@ -27,3 +27,12 @@ export const Title = styled.h1`
   align-items: center;
   flex: 0.8;
 `;
+
+export const LoadingContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+`;
