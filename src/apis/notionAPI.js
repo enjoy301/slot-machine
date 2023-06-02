@@ -23,12 +23,6 @@ const objectBody = {
   filter: {
     and: [
       {
-        property: "object",
-        rich_text: {
-          is_not_empty: true,
-        },
-      },
-      {
         property: "text",
         title: {
           is_not_empty: true,
@@ -39,6 +33,22 @@ const objectBody = {
         select: {
           is_not_empty: true,
         },
+      },
+      {
+        or: [
+          {
+            property: "image",
+            files: {
+              is_not_empty: true,
+            },
+          },
+          {
+            property: "emoji",
+            rich_text: {
+              is_not_empty: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -83,7 +93,10 @@ export const notionAPI = createApi({
 
         response.results.forEach(function iter(item) {
           objects.push({
-            object: item.properties.object.rich_text[0].plain_text,
+            object:
+              item.properties.type.select.name === "emoji"
+                ? item.properties.emoji.rich_text[0].plain_text
+                : item.properties.image.files[0].file.url,
             name: item.properties.text.title[0].plain_text,
             type: item.properties.type.select.name,
           });
