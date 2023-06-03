@@ -20,14 +20,14 @@ const clicked = keyframes`
 `;
 
 export const RoundButton = styled.button`
-  width: 215px;
-  height: 50px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-color: ${(props) => props.backgroundcolor};
   border: 0;
   border-radius: 100px;
   color: ${(props) => props.color};
   cursor: pointer;
-  font-size: 20px;
+  font-size: ${(props) => props.size};
   font-family: "IM_Hyemin-Bold";
   ${(props) => {
     if (props.animation === "play") {
@@ -43,4 +43,8 @@ export const RoundButton = styled.button`
       }
     `;
   }}
+
+  @media (max-width: 650px) {
+    width: 60%;
+  }
 `;

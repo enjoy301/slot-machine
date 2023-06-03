@@ -70,7 +70,9 @@ export default function HomePage() {
       <HomePageLayout>
         <Background />
         <Container>
-          <Title color={config.titleTextColor}>{config.title}</Title>
+          <Title color={config.titleTextColor} font={config.titleTextSize}>
+            {config.title}
+          </Title>
           <Slot />
           <Button />
           <Result />

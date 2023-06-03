@@ -5,17 +5,17 @@ export const Container = styled.div.attrs((props) => ({
     marginTop: `${props.margin}px`,
   },
 }))`
-  flex: 1;
+  flex: 0 ${(props) => props.width};
   display: flex;
   flex-direction: column;
 `;
 
 export const Emoji = styled.div`
-  /* height: 92px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 70px;
+  font-size: calc(${(props) => props.size} * 0.7);
+  line-height: ${(props) => props.size};
 `;
 
 export const ImageContainer = styled.div`
@@ -26,6 +26,6 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 92px;
-  height: 92px;
+  /* width: ${(props) => props.size}; */
+  height: ${(props) => props.size};
 `;

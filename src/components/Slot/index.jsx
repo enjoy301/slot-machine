@@ -16,13 +16,18 @@ export default function Slot() {
   return (
     <Container>
       <LeftArrowContainer>
-        <LeftArrow color={config.slotColor} />
+        <LeftArrow color={config.slotColor} size={config.slotSize} />
       </LeftArrowContainer>
       <Slider />
       <RightArrowContainer>
-        <RightArrow color={config.slotColor} />
+        <RightArrow color={config.slotColor} size={config.slotSize} />
       </RightArrowContainer>
-      <Pointer color={config.slotColor} />
+      <Pointer
+        color={config.slotColor}
+        size={config.slotSize}
+        width={config.itemWidth}
+        height={config.itemHeight}
+      />
     </Container>
   );
 }

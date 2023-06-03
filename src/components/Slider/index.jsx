@@ -4,16 +4,17 @@ import { Container, Emoji, Image, ImageContainer } from "./Slider.styles";
 import { reverseStopping, addResult } from "../../redux/slotSlice";
 import useInterval from "../../hooks/useInterval";
 
-const INITIAL_SPEED = 10;
 const INITIAL_STOP_POINT = 987654321;
 
 export default function Slider() {
+  const config = useSelector((state) => state.config.config);
+
   const [margin, setMargin] = useState(0);
   const [itemHeight, setItemHeight] = useState(0);
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
-  const [speed, setSpeed] = useState(INITIAL_SPEED);
-  const [beforeSpeed, setBeforeSpeed] = useState(INITIAL_SPEED);
+  const [speed, setSpeed] = useState(config.speed);
+  const [beforeSpeed, setBeforeSpeed] = useState(config.speed);
   const [stopPoint, setStopPoint] = useState(INITIAL_STOP_POINT);
 
   const dispatch = useDispatch();
@@ -62,9 +63,9 @@ export default function Slider() {
 
         // 속도 조절
         if (speed > 10) {
-          setSpeed(speed - 0.2);
+          setSpeed(speed - 0.1);
         } else if (speed > 5) {
-          setSpeed(speed - 0.15);
+          setSpeed(speed - 0.1);
         } else if (speed > 0) {
           setSpeed(speed - 0.05);
         } else if (speed > -3) {
@@ -86,7 +87,7 @@ export default function Slider() {
             ),
           );
           dispatch(reverseStopping());
-          setSpeed(INITIAL_SPEED);
+          setSpeed(config.speed);
           setStopPoint(987654321);
         }
       }
@@ -106,27 +107,35 @@ export default function Slider() {
       if (index === 1) {
         if (object.type === "emoji") {
           return (
-            <Emoji ref={objectRef} key={index}>
+            <Emoji ref={objectRef} key={index} size={config.itemHeight}>
               {object.object}
             </Emoji>
           );
         }
         return (
           <ImageContainer ref={objectRef}>
-            <Image key={index} src={object.object} />
+            <Image key={index} src={object.object} size={config.itemHeight} />
           </ImageContainer>
         );
       }
       if (object.type === "emoji") {
-        return <Emoji key={index}>{object.object}</Emoji>;
+        return (
+          <Emoji key={index} size={config.itemHeight}>
+            {object.object}
+          </Emoji>
+        );
       }
       return (
         <ImageContainer key={index}>
-          <Image src={object.object} />
+          <Image src={object.object} size={config.itemHeight} />
         </ImageContainer>
       );
     });
   };
 
-  return <Container margin={margin}>{renderObject()}</Container>;
+  return (
+    <Container margin={margin} width={config.itemWidth}>
+      {renderObject()}
+    </Container>
+  );
 }

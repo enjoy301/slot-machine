@@ -23,10 +23,16 @@ export default function Result() {
       if (result[i].type === "image") {
         elements.push(
           <Container key={(key += 1)}>
-            <ImageContainer color={config.resultColor}>
-              <Image src={result[i].object} />
+            <ImageContainer
+              color={config.resultColor}
+              itemsize={config.itemSize}
+            >
+              <Image src={result[i].object} itemsize={config.itemSize} />
             </ImageContainer>
-            <ImojiText color={config.resultTextColor}>
+            <ImojiText
+              color={config.resultTextColor}
+              size={config.resultTextSize}
+            >
               {result[i].name}
             </ImojiText>
           </Container>,
@@ -34,10 +40,16 @@ export default function Result() {
       } else if (result[i].type === "emoji") {
         elements.push(
           <Container key={(key += 1)}>
-            <EmojiContainer color={config.resultColor}>
-              <Emoji>{result[i].object}</Emoji>
+            <EmojiContainer
+              color={config.resultColor}
+              itemsize={config.itemSize}
+            >
+              <Emoji itemsize={config.itemSize}>{result[i].object}</Emoji>
             </EmojiContainer>
-            <ImojiText color={config.resultTextColor}>
+            <ImojiText
+              color={config.resultTextColor}
+              size={config.resultTextSize}
+            >
               {result[i].name}
             </ImojiText>
           </Container>,
@@ -45,10 +57,18 @@ export default function Result() {
       } else {
         elements.push(
           <Container key={(key += 1)}>
-            <EmojiContainer color={config.resultColor}>
+            <EmojiContainer
+              color={config.resultColor}
+              itemsize={config.itemSize}
+            >
               <Emoji />
             </EmojiContainer>
-            <ImojiText color={config.resultTextColor} />
+            <ImojiText
+              color={config.resultTextColor}
+              size={config.resultTextSize}
+            >
+              ㅤ
+            </ImojiText>
           </Container>,
         );
       }

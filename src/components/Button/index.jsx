@@ -31,8 +31,11 @@ export default function Button() {
       <RoundButton
         onClick={handleClick}
         animation={isStopping ? "stop" : "play"}
+        width={config.buttonWidth}
+        height={config.buttonHeight}
         color={config.buttonTextColor}
         backgroundcolor={config.buttonColor}
+        size={config.buttonTextSize}
       >
         {buttonText()}
       </RoundButton>

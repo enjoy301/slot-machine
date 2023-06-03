@@ -9,8 +9,8 @@ export const Container = styled.div`
 
 export const EmojiContainer = styled.div`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: ${(props) => props.itemsize};
+  height: ${(props) => props.itemsize};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -22,13 +22,14 @@ export const Emoji = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: calc(${(props) => props.itemsize} * 0.7);
+  line-height: ${(props) => props.itemsize};
 `;
 
 export const ImageContainer = styled.div`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: ${(props) => props.itemsize};
+  height: ${(props) => props.itemsize};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -37,8 +38,8 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 40px;
-  height: 40px;
+  /* width: calc(${(props) => props.itemsize} * 0.7); */
+  height: calc(${(props) => props.itemsize} * 0.7);
 `;
 
 export const ImojiText = styled.div`
@@ -47,8 +48,9 @@ export const ImojiText = styled.div`
   justify-content: center;
   align-items: center;
   color: ${(props) => props.color};
-  font-size: 20px;
-  margin-top: 10px;
+  font-size: calc(${(props) => props.size} * 0.8);
+  line-height: ${(props) => props.size};
+  margin-top: calc(${(props) => props.size} * 0.4);
 `;
 
 export const ResultContainer = styled.div`

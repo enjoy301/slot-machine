@@ -16,9 +16,11 @@ export const LeftArrowContainer = styled.div`
 `;
 
 export const LeftArrow = styled.div`
-  border-left: 20px solid ${(props) => props.color};
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
+  border-left: calc(20px * ${(props) => props.size}) solid
+    ${(props) => props.color};
+  border-top: calc(10px * ${(props) => props.size}) solid transparent;
+  border-bottom: calc(10px * ${(props) => props.size}) solid transparent;
+  padding-right: calc(10px * ${(props) => props.size});
 `;
 
 export const RightArrowContainer = styled.div`
@@ -29,15 +31,17 @@ export const RightArrowContainer = styled.div`
 `;
 
 export const RightArrow = styled.div`
-  border-right: 20px solid ${(props) => props.color};
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
+  border-right: calc(20px * ${(props) => props.size}) solid
+    ${(props) => props.color};
+  border-top: calc(10px * ${(props) => props.size}) solid transparent;
+  border-bottom: calc(10px * ${(props) => props.size}) solid transparent;
+  padding-left: calc(10px * ${(props) => props.size});
 `;
 
 export const Pointer = styled.div`
-  width: 150px;
-  height: 90px;
-  border: 2px solid ${(props) => props.color} !important;
+  width: calc(${(props) => props.width} * 0.9);
+  height: calc(${(props) => props.height} * 0.9);
+  border: calc(2px * ${(props) => props.size}) solid ${(props) => props.color} !important;
   border-radius: 10px !important;
   position: absolute;
   top: 50%;

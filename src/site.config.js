@@ -5,18 +5,28 @@ const CONFIG = {
 
   title: "무엇이 될까요?",
   titleTextColor: "yellow",
+  titleTextSize: "30px",
 
   slotColor: "#ffd976",
+  slotSize: 1.1,
+  itemWidth: "200px",
+  itemHeight: "100px",
+  speed: 15,
 
+  buttonWidth: "35%",
+  buttonHeight: "35%",
   buttonColor: "#ffb800",
   buttonTextColor: "#ffffff",
+  buttonTextSize: "20px",
   spinText: "돌려!",
   stopText: "멈춰!",
   stoppingText: "두근두근",
 
   resultColor: "rgba(255, 217, 118, 0.3)",
   resultTextColor: "#ffb800",
+  resultTextSize: "25px",
   partitionColor: "#ffb800",
+  itemSize: "60px",
 
   objectArray: [
     { object: "👋", name: "안녕", type: "emoji" },
