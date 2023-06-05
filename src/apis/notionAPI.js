@@ -57,7 +57,7 @@ const objectBody = {
 export const notionAPI = createApi({
   reducerPath: "notionAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/",
+    baseUrl: "https://detective-proxy.herokuapp.com/https://api.notion.com/v1/",
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
       "Notion-Version": "2022-06-28",

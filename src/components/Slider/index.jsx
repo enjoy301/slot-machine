@@ -113,8 +113,8 @@ export default function Slider() {
           );
         }
         return (
-          <ImageContainer ref={objectRef}>
-            <Image key={index} src={object.object} size={config.itemHeight} />
+          <ImageContainer ref={objectRef} key={index}>
+            <Image src={object.object} size={config.itemHeight} />
           </ImageContainer>
         );
       }
